@@ -32,6 +32,12 @@ class Api::V1::ProductsController < ApplicationController
     product.update(prod_params)
     render json: product
   end
+
+  def destroy
+    product = Product.find_by(id: params[:id])
+    product.delete()
+    render json: product
+  end
 end
 
 private
