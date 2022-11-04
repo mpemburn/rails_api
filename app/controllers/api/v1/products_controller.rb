@@ -29,15 +29,23 @@ class Api::V1::ProductsController < ApplicationController
 
   def update
     product = Product.find_by(id: params[:id])
-    product.update(prod_params)
-    render json: product
+    if (product)
+      product.update(prod_params)
+      render json: product
+    else
+      render json: { error: "Product not found."}
+    end
   end
 
   def destroy
     product = Product.find_by(id: params[:id])
-    product.delete()
-    render json: product
-  end
+    if (product)
+      product.delete()
+      render json: product
+    else
+      render json: { error: "Product not found."}
+    end
+   end
 end
 
 private
